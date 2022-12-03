@@ -3,7 +3,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
-chrome_driver_path = Service("/Users/faisalalnamlah/Desktop/Python Practice/chromedriver")
+EMAIL = "-"
+PASSWORD = "-"
+YEARS = 3
+chrome_driver_path = Service("-")
 web_page = webdriver.Chrome(service=chrome_driver_path)
 url = "https://www.linkedin.com/jobs/search/?currentJobId=3205241209&f_AL=true&geoId=92000000&keywords=marketing%20specialist&location=Worldwide&refresh=true"
 
@@ -14,13 +17,13 @@ sign_in = web_page.find_element(By.XPATH, '/html/body/div[3]/a[1]')
 sign_in.click()
 time.sleep(3)
 email = web_page.find_element(By.XPATH, '//*[@id="username"]')
-email.send_keys("-")
+email.send_keys(EMAIL)
 password = web_page.find_element(By.XPATH, '//*[@id="password"]')
-password.send_keys("-")
+password.send_keys(PASSWORD)
 sign_in_button = web_page.find_element(By.XPATH, '//*[@id="organic-div"]/form/div[3]/button')
 sign_in_button.send_keys(Keys.ENTER)
 # clicking: Easy apply
-time.sleep(10)
+time.sleep(5)
 job_link = web_page.find_element(By.CSS_SELECTOR, '.jobs-apply-button')
 job_link.click()
 time.sleep(3)
@@ -32,10 +35,19 @@ next_button = web_page.find_element(By.CSS_SELECTOR, 'button[aria-label="Continu
 next_button.click()
 time.sleep(3)
 next_button.click()
-# review button
-review_button = web_page.find_element(By.CSS_SELECTOR, 'button[aria-label="Review your application"]')
-review_button.click()
 
+# Filling in the forum:
+sales_year = web_page.find_element(By.XPATH, '//*[@id="urn:li:fs_easyApplyFormElement:(urn:li:fs_normalized_jobPosting:3205241209,65618109,numeric)"]')
+sales_year.send_keys(YEARS)
+marketing_year = web_page.find_element(By.XPATH, '//*[@id="urn:li:fs_easyApplyFormElement:(urn:li:fs_normalized_jobPosting:3205241209,65618117,numeric)"]')
+marketing_year.send_keys(YEARS)
+ad_year = web_page.find_element(By.XPATH, '//*[@id="urn:li:fs_easyApplyFormElement:(urn:li:fs_normalized_jobPosting:3205241209,65618165,numeric)"]')
+ad_year.send_keys(YEARS)
+account_year = web_page.find_element(By.XPATH, '//*[@id="urn:li:fs_easyApplyFormElement:(urn:li:fs_normalized_jobPosting:3205241209,65618157,numeric)"]')
+account_year.send_keys(YEARS)
+time.sleep(3)
+button_yes = web_page.find_element(By.ID, 'radio-urn:li:fs_easyApplyFormElement:(urn:li:fs_normalized_jobPosting:3205241209,65618149,multipleChoice)_0')
+button_yes.send_keys(Keys.END)
 
 time.sleep(1000)
 
